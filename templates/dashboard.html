@@ -1,0 +1,253 @@
+{% extends 'nav.html' %}
+{% load static %}
+
+
+{% block content %}
+
+
+            <!-- breadcrumb begin -->
+            <div class="breadcrumb-oitila db-breadcrumb">
+                <div class="container">
+                    <div class="row justify-content-lg-around">
+                        <div class="col-xl-6 col-lg-7 col-md-5 col-sm-6 col-8">
+                            <div class="part-txt">
+                                <h1>User Dashboard</h1>
+                                <ul>
+                                    <li>home</li>
+                                    <li>Dashboard</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-5 col-md-7 col-sm-6 col-4 d-flex align-items-center">
+                            <div class="db-user-profile">
+                                <div class="part-data">
+                                    <span class="name">{{request.user.first_name}} {{request.user.last_name}}</span>
+                                    <ul>
+                                        <li>
+                                            <span class="text">My Referer Code: </span>
+                                            <span class="number"><input readonly type="text" value="{{request.user.code}}" name="" id=""></span>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+                                <div class="part-img">
+                                    <img src="{{request.user.image.url}}" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- breadcrumb end -->
+
+            <!-- account begin -->
+            <div class="user-dashboard">
+                <div class="container">
+
+                    <div class="dashboard-menu">
+                        <nav>
+                            <ul>
+                                <li class="nav-item">
+                                    <a class='nav-link active' href="{% url 'dashboard' %}">Dashboard</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class='nav-link' href='{% url "plan" %}'>Investment</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class='nav-link' href='{% url "payment" %}'>Deposit</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class='nav-link' href='{% url "withdraw" %}'>Withdraw</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class='nav-link' href='{% url "history" %}'>Investment History</a>
+                                </li>
+                                
+                                <li class="nav-item">
+                                    <a class='nav-link' href='{% url "profile" request.user.id %}'>Settings</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                    <div class="user-statics">
+                        <div class="row">
+                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                                <div class="single-statics">
+                                    <div class="part-icon">
+                                        <img src="{% static 'img/icon/002-cash.png' %}" alt="">
+                                    </div>
+                                    <div class="part-info">
+                                        <span class="number">${{tbalance}}</span>
+                                        <span class="text">Total Balance</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                                <div class="single-statics">
+                                    <div class="part-icon">
+                                        <img src="{% static 'img/icon/002-cash.png' %}" alt="">
+                                    </div>
+                                    <div class="part-info">
+                                        <span class="number">${{total}}.00</span>
+                                        <span class="text">Deposit Balance</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                                <div class="single-statics">
+                                    <div class="part-icon">
+                                        <img src="{% static 'img/icon/003-credit-card.png' %}" alt="">
+                                    </div>
+                                    <div class="part-info">
+                                        <span class="number">${{profit}}</span>
+                                        <span class="text">Investment Profit</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                                <div class="single-statics">
+                                    <div class="part-icon">
+                                        <img src="{% static 'img/icon/001-donation.png' %}" alt="">
+                                    </div>
+                                    <div class="part-info">
+                                        <span class="number">${{tinvest}}.00</span>
+                                        <span class="text"> Total Investment</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                                <div class="single-statics">
+                                    <div class="part-icon">
+                                        <img src="{% static 'img/icon/001-donation.png' %}" alt="">
+                                    </div>
+                                    <div class="part-info">
+                                        <span class="number">${{pendingDeposit}}.00</span>
+                                        <span class="text"> Pending Deposit </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                                <div class="single-statics">
+                                    <div class="part-icon">
+                                        <img src="{% static 'img/icon/001-donation.png' %}" alt="">
+                                    </div>
+                                    <div class="part-info">
+                                        <span class="number">${{withdrawal}}.00</span>
+                                        <span class="text">Pending Withdrawal</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-4 benmathew-col">
+                            <h3 class="title">
+                                Users Logs
+                            </h3>
+                            <div class="user-benmathew">
+                                <div class="single-data">
+                                    <span class="title">Registration Date</span>
+                                    <span class="data">Sep-10-2014 11:20:37</span>
+                                </div>
+                                <div class="single-data">
+                                    <span class="title">Last Login</span>
+                                    <span class="data">Jul-05-2019 07:06:36</span>
+                                </div>
+                                <div class="single-data">
+                                    <span class="title">Current Login</span>
+                                    <span class="data">Jul-06-2019 02:47:23</span>
+                                </div>
+                                <div class="single-data">
+                                    <span class="title">Last Access IP</span>
+                                    <span class="data">27.57.18.1</span>
+                                </div>
+                                <div class="single-data">
+                                    <span class="title">Current Access IP</span>
+                                    <span class="data">122.175.131.51</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-9 col-lg-8 chart-col">
+                            <div class="transaction-chart">
+                                <h3 class="title">
+                                    Transaction & Deposit
+                                </h3>
+                                <div class="charts-for-misco">
+                                    <!-- TradingView Widget BEGIN -->
+                            <div class="tradingview-widget-container">
+                                <div class="tradingview-widget-container__widget"></div>
+                                <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on TradingView</span></a></div>
+                                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
+                                {
+                                "width": 900,
+                                "height": 400,
+                                "defaultColumn": "overview",
+                                "screener_type": "crypto_mkt",
+                                "displayCurrency": "USD",
+                                "colorTheme": "light",
+                                "locale": "en"
+                            }
+                                </script>
+                            </div>
+  <!-- TradingView Widget END -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12">
+                            <div class="transactions-table">
+                                <h3 class="title">
+                                    Recent Transaction History
+                                </h3>
+                                <div class="table-responsive">
+                                    <table id="example" class="display misco-data-table" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Amount</th>
+                                                <th>Method</th>
+                                                <th>Type</th>
+                                                <th>Status</th>
+                                                <th>Time</th>
+                                               
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for trans in transaction %}
+                                            <tr>
+                                                <td>{{trans.user.username}}</td>
+                                                <td>${{trans.amount}}</td>
+                                                <td>{{trans.payment_method}}</td>
+                                                <td>{{trans.transaction_type}}</td>
+                                                <td>{{trans.status}}</td>
+                                                <td>{{trans.created}}</td>
+                                            </tr>
+                                            {% endfor %}
+                                            
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Position</th>
+                                                <th>Office</th>
+                                                <th>Age</th>
+                                                <th>Start date</th>
+                                                <th>Salary</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- account end -->
+{% endblock %}

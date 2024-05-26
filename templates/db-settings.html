@@ -1,0 +1,329 @@
+{% extends 'nav.html' %}
+{% load static %}
+
+
+{% block content %}
+
+            <!-- breadcrumb begin -->
+            <div class="breadcrumb-oitila db-breadcrumb">
+                <div class="container">
+                    <div class="row justify-content-lg-around">
+                        <div class="col-xl-6 col-lg-7 col-md-5 col-sm-6 col-8">
+                            <div class="part-txt">
+                                <h1>User Dashboard</h1>
+                                <ul>
+                                    <li>home</li>
+                                    <li>Dashboard</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-5 col-md-7 col-sm-6 col-4 d-flex align-items-center">
+                            <div class="db-user-profile">
+                                <div class="part-data">
+                                    <span class="name">{{request.user.first_name}} {{request.user.last_name}}</span>
+                                    <ul>
+                                        <li>
+                                            <span class="text">My Referer Code: </span>
+                                            <span class="number"><input readonly type="text" value="{{request.user.code}}" name="" id=""></span>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+                                <div class="part-img">
+                                    <img src="{{request.user.image.url}}" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- breadcrumb end -->
+
+            <!-- account begin -->
+            <div class="user-dashboard">
+                <div class="container">
+
+                    <div class="dashboard-menu">
+                        <nav>
+                            <ul>
+                                <li class="nav-item">
+                                    <a class='nav-link ' href="{% url 'dashboard' %}">Dashboard</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class='nav-link' href='{% url "plan" %}'>Investment</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class='nav-link' href='{% url "payment" %}'>Deposit</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class='nav-link' href='{% url "withdraw" %}'>Withdraw</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class='nav-link' href='{% url "history" %}'>Investment History</a>
+                                </li>
+                                
+                                <li class="nav-item">
+                                    <a class='nav-link active' href='{% url "profile" request.user.id %}'>Settings</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    
+                    <div class="user-statics">
+                        <div class="row">
+                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                                <div class="single-statics">
+                                    <div class="part-icon">
+                                        <img src="{% static 'img/icon/002-cash.png' %}" alt="">
+                                    </div>
+                                    <div class="part-info">
+                                        <span class="number">${{tbalance}}.00</span>
+                                        <span class="text">Total Balance</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                                <div class="single-statics">
+                                    <div class="part-icon">
+                                        <img src="{% static 'img/icon/002-cash.png' %}" alt="">
+                                    </div>
+                                    <div class="part-info">
+                                        <span class="number">${{total}}.00</span>
+                                        <span class="text">Deposit Balance</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                                <div class="single-statics">
+                                    <div class="part-icon">
+                                        <img src="{% static 'img/icon/003-credit-card.png' %}" alt="">
+                                    </div>
+                                    <div class="part-info">
+                                        <span class="number">${{profit}}.00</span>
+                                        <span class="text">Total Profit</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                                <div class="single-statics">
+                                    <div class="part-icon">
+                                        <img src="{% static 'img/icon/001-donation.png' %}" alt="">
+                                    </div>
+                                    <div class="part-info">
+                                        <span class="number">${{tinvest}}.00</span>
+                                        <span class="text"> Total Investment</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                        </div>
+                    </div>
+
+                    <!-- profile begin -->
+                    <div class="profile">
+                            <div class="row justify-content-center">
+                                <div class="col-xl-3 col-lg-3">
+                                    <!-- <div class="accont-tab">
+                                        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                            <a class="nav-link active" id="personal-info-tab" data-toggle="pill" href="#personal-info" role="tab" aria-controls="v-pills-home" aria-selected="true"><i class="far fa-user"></i> Personal Info</a>
+                                            <a class="nav-link" id="payment-info-tab" data-toggle="pill" href="#payment-info" role="tab" aria-controls="v-pills-profile" aria-selected="false"><i class="fas fa-credit-card"></i> Payment Info</a>
+                                            <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false"><i class="fas fa-tasks"></i> Privacy Settings</a>
+                                            <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false"><i class="fas fa-cog"></i> Account Settings</a>
+                                        </div>
+                                    </div> -->
+                                </div>
+                                <div class="col-xl-9 col-lg-9">
+                                    <div class="tab-content" id="v-pills-tabContent">
+                                        <div class="tab-pane fade show active" id="personal-info" role="tabpanel" aria-labelledby="personal-info-tab">
+                                            <h3 class="title">Edit {{request.user.username}}'s Profile</h3>
+                                            <div class="player-profile">
+                                                <div class="row no-gutters">
+                                                    <div class="col-xl-4 col-lg-4 col-md-4">
+                                                        <div class="player-card">  
+                                                            <div class="part-pic">
+                                                                <img src="{{request.user.image.url}}" alt="">
+                                                            </div>
+                                                            <!-- <div class="social-link">
+                                                                <ul>
+                                                                    <li>
+                                                                        <a href="#">
+                                                                            <i class="fab fa-facebook-messenger"></i>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#">
+                                                                            <i class="fab fa-youtube"></i>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="#">
+                                                                            <i class="fab fa-twitter"></i>
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div> -->
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-8 col-lg-8 col-md-8">
+                                                        <div class="part-info">
+                                                            <span class="player-name">
+                                                                {{request.user.first_name}} {{request.user.last_name}}
+                                                                <img src="https://oitila.netlify.app/assets/img/svg/medal.svg" alt="">
+                                                            </span>
+                                                            <ul>
+                                                                <li>
+                                                                    <span class="property"><i class="fas fa-info-circle"></i> First Name :</span>   
+                                                                    <span class="value">{{request.user.first_name}}  </span>   
+                                                                </li>
+                                                                <li>
+                                                                    <span class="property"><i class="fas fa-info-circle"></i> Last Name :</span>   
+                                                                    <span class="value">{{request.user.last_name}}</span>   
+                                                                </li>
+                                                                <li>
+                                                                    <span class="property"><i class="fas fa-info-circle"></i> Email Address :</span>   
+                                                                    <span class="value">{{request.user}}</span>   
+                                                                </li>
+                                                                
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="edit-profile text-center">
+                                                <a href="{% url 'editprofile' request.user.id %}" class="btn-hyipox-2">Edit Profile</a>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="payment-info" role="tabpanel" aria-labelledby="payment-info-tab">
+                                            <h3 class="title">Payment Info</h3>
+                                            <div class="payment-info">
+                                                <div class="responsive">
+                                                    <table class="table table-bordered">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Payment Method</td>
+                                                                <td>Mastercard •••• •••• •••• 0000</td>
+                                                                <td><a href="#" class="payment-info-button">Upadte</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Billing Address</td>
+                                                                <td>1234 Example Ave | Seattle, WA</td>
+                                                                <td><a href="#" class="payment-info-button">change</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Zipcode</td>
+                                                                <td>999000</td>
+                                                                <td><a href="#" class="payment-info-button">Edit</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Billing History</td>
+                                                                <td>2018</td>
+                                                                <td><a href="#" class="payment-info-button">View</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Redeem Gift Subscription </td>
+                                                                <td><input type="text" placeholder="Enter Gift Code"></td>
+                                                                <td><a href="#" class="payment-info-button">Redeem</a></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+
+                                                    <table class="table table-bordered">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Payment Date</td>
+                                                                <td>05-15-2018</td>
+                                                                <td><a href="#" class="payment-info-button">pay now</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Your Next Charge</td>
+                                                                <td colspan="2">$8.48<small>(includes tax)</small></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Lotters Base Plan</td>
+                                                                <td>Limited Commercials</td>
+                                                                <td><a href="#" class="payment-info-button">change plan</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Add-ons</td>
+                                                                <td>None</td>
+                                                                <td><a href="#" class="payment-info-button">manage</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Monthly Recurring Total </td>
+                                                                <td colspan="2">$7.99/month</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                                            <h3 class="title">Privacy Settings</h3>
+                                            <div class="privacy-settings">
+                                                <div class="responsive">
+                                                    <table class="table table-bordered">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Manage Email Notifications</td> 
+                                                                <td><a href="#" class="payment-info-button">Manage</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Manage Privacy Settings</td> 
+                                                                <td><a href="#" class="payment-info-button">Manage</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Personalize Ad Experience</td>
+                                                                <td><a href="#" class="payment-info-button">Update</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Protect Your Account </td>
+                                                                <td><a href="#" class="payment-info-button">Protect</a></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                                            <div class="account-settings">
+                                                <h3 class="title">Account Settings</h3>
+                                                <div class="responsive">
+                                                    <table class="table table-bordered">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Sync Watchlist to My Stuff</td> 
+                                                                <td><a href="#" class="payment-info-button">Sync</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Hold Your Subscription</td> 
+                                                                <td><a href="#" class="payment-info-button">Hold</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Cancel Your Subscription</td>
+                                                                <td><a href="#" class="payment-info-button">Cancel</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Your Devices  </td>
+                                                                <td><a href="#" class="payment-info-button">Manage</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Referrals  </td>
+                                                                <td><a href="#" class="payment-info-button">Get $10</a></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <!-- profile end -->
+                    
+                </div>
+            </div>
+            <!-- account end -->
+{% endblock %}

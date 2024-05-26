@@ -1,0 +1,204 @@
+{% extends 'nav.html' %}
+{% load static %}
+
+{% load widget_tweaks %}
+
+
+{% block content %}
+
+            <!-- breadcrumb begin -->
+            <div class="breadcrumb-oitila db-breadcrumb">
+                <div class="container">
+                    <div class="row justify-content-lg-around">
+                        <div class="col-xl-6 col-lg-7 col-md-5 col-sm-6 col-8">
+                            <div class="part-txt">
+                                <h1>User Dashboard</h1>
+                                <ul>
+                                    <li>home</li>
+                                    <li>Dashboard</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-5 col-md-7 col-sm-6 col-4 d-flex align-items-center">
+                            <div class="db-user-profile">
+                                <div class="part-data">
+                                    <span class="name">{{request.user.first_name}} {{request.user.last_name}}</span>
+                                    <ul>
+                                        <li>
+                                            <span class="text">My Referer Code: </span>
+                                            <span class="number"><input readonly type="text" value="{{request.user.code}}" name="" id=""></span>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+                                <div class="part-img">
+                                    <img src="{{request.user.image.url}}" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- breadcrumb end -->
+
+            <!-- account begin -->
+            <div class="user-dashboard">
+                <div class="container">
+
+                    <div class="dashboard-menu">
+                        <nav>
+                            <ul>
+                                <li class="nav-item">
+                                    <a class='nav-link ' href="{% url 'dashboard' %}">Dashboard</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class='nav-link active' href='{% url "plan" %}'>Investment</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class='nav-link' href='{% url "payment" %}'>Deposit</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class='nav-link' href='{% url "withdraw" %}'>Withdraw</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class='nav-link' href='{% url "history" %}'>Investment History</a>
+                                </li>
+                                
+                                <li class="nav-item">
+                                    <a class='nav-link' href='{% url "profile" request.user.id %}'>Settings</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    
+                    <div class="user-statics">
+                        <div class="row">
+                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                                <div class="single-statics">
+                                    <div class="part-icon">
+                                        <img src="{% static 'img/icon/002-cash.png' %}" alt="">
+                                    </div>
+                                    <div class="part-info">
+                                        <span class="number">${{tbalance}}</span>
+                                        <span class="text">Total Balance</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                                <div class="single-statics">
+                                    <div class="part-icon">
+                                        <img src="{% static 'img/icon/002-cash.png' %}" alt="">
+                                    </div>
+                                    <div class="part-info">
+                                        <span class="number">${{total}}.00</span>
+                                        <span class="text">Deposit Balance</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                                <div class="single-statics">
+                                    <div class="part-icon">
+                                        <img src="{% static 'img/icon/003-credit-card.png' %}" alt="">
+                                    </div>
+                                    <div class="part-info">
+                                        <span class="number">${{profit}}</span>
+                                        <span class="text">Investment Profit</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                                <div class="single-statics">
+                                    <div class="part-icon">
+                                        <img src="{% static 'img/icon/001-donation.png' %}" alt="">
+                                    </div>
+                                    <div class="part-info">
+                                        <span class="number">${{tinvest}}.00</span>
+                                        <span class="text"> Total Investment</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                                <div class="single-statics">
+                                    <div class="part-icon">
+                                        <img src="{% static 'img/icon/001-donation.png' %}" alt="">
+                                    </div>
+                                    <div class="part-info">
+                                        <span class="number">${{pendingDeposit}}.00</span>
+                                        <span class="text"> Pending Deposit </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                                <div class="single-statics">
+                                    <div class="part-icon">
+                                        <img src="{% static 'img/icon/001-donation.png' %}" alt="">
+                                    </div>
+                                    <div class="part-info">
+                                        <span class="number">${{withdrawal}}.00</span>
+                                        <span class="text">Pending Withdrawal</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                        </div>
+                    </div>
+
+                    <h3 class="title">
+                        Select Your Favourite Plan
+                    </h3>
+
+                    <div class="d-none">
+                        <div class="icon-completed">
+                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+                                <circle class="path circle" fill="none" stroke="#73AF55" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"></circle>
+                                <polyline class="path check" fill="none" stroke="#73AF55" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 "></polyline>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="select-plan">
+                        <div class="row justify-content-lg-center">
+                            {% for plan in plans %}
+                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-4">
+                                <div class="single-plan">
+                                    <h3 class="text-uppercase">{{plan.name}} Plan</h3>
+                                    <div class="plan-icon">
+                                        <img class="icon-img" src="assets/img/icon/bronze-medal.png" alt="">
+                                    </div>
+                                    <div class="price-info">
+                                        <span class="parcent">{{plan.percentage}}%</span>
+                                    </div>
+
+                                    <div class="feature-list">
+                                        <ul class="text-start ms-3">
+                                            <li><i class="fas fa-check"></i> Minimum Deposit - ${{plan.minimum_amount}}</li>
+                                            <li><i class="fas fa-check"></i> Miximum Deposit - ${{plan.maximum_amount}}</li>
+                                            <li><i class="fas fa-check"></i> l- Enhanced security</li>
+                                            <li><i class="fas fa-check"></i> Access to all features</li>
+                                            <li><i class="fas fa-check"></i> 24/7 dedicated support</li>
+                                        </ul>
+                                    </div>
+                                    <div class="price-info">
+                                        <span class="price text-danger">{{plan.percentage}}% AFTER {{plan.hours}} DAYS</span>
+                                    </div>
+                                    <a href="#" class="btn-hyipox-medium price-button">Select Plan</a>
+                                </div>
+                                <center>
+
+                                    <a href="{{plan.get_url}}" class="btn-hyipox-medium">Invest Now</a>
+                                </center>
+                                
+                            </div>
+                            {% endfor %}
+                           
+                        </div>
+                    </div>
+
+                    
+
+                </div>
+            </div>
+            <!-- account end -->
+{% endblock %}

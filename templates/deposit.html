@@ -1,0 +1,157 @@
+{% extends 'nav.html' %}
+{% load static %}
+
+{% load widget_tweaks %}
+
+
+{% block content %}
+
+            <!-- breadcrumb begin -->
+            <div class="breadcrumb-oitila db-breadcrumb">
+                <div class="container">
+                    <div class="row justify-content-lg-around">
+                        <div class="col-xl-6 col-lg-7 col-md-5 col-sm-6 col-8">
+                            <div class="part-txt">
+                                <h1>User Dashboard</h1>
+                                <ul>
+                                    <li>home</li>
+                                    <li>Deposit</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-5 col-md-7 col-sm-6 col-4 d-flex align-items-center">
+                            <div class="db-user-profile">
+                                <div class="part-data">
+                                    <span class="name">{{request.user.first_name}} {{request.user.last_name}}</span>
+                                    <ul>
+                                        <li>
+                                            <span class="text">Invest</span>
+                                            <span class="number">$100</span>
+                                        </li>
+                                        <li>
+                                            <span class="text">Earings</span>
+                                            <span class="number">$250</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="part-img">
+                                    <img src="{{request.user.image.url}}" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- breadcrumb end -->
+
+            <!-- account begin -->
+            <div class="user-dashboard">
+                <div class="container">
+
+                    <div class="dashboard-menu">
+                        <nav>
+                            <ul>
+                                <li class="nav-item">
+                                    <a class='nav-link ' href="{% url 'dashboard' %}">Dashboard</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class='nav-link' href='{% url "plan" %}'>Investment</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class='nav-link active' href='{% url "payment" %}'>Deposit</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class='nav-link' href='{% url "withdraw" %}'>Withdraw</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class='nav-link' href='{% url "history" %}'>History</a>
+                                </li>
+                                <!-- <li class="nav-item">
+                                    <a class='nav-link' href='db-referral.html'>Referrals</a>
+                                </li> -->
+                                <li class="nav-item">
+                                    <a class='nav-link' href='{% url "profile" request.user.id %}'>Settings</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    
+                    <div class="user-statics">
+                        <h4 class="fw-bold text-center text-primary my-3"><span class="text-danger">NOTE:</span> Follow the Steps Below to complete your deposit</h4>
+                        <ol>
+                            <li>Copy the Wallet Address Below</li>
+                            <li>Make Payment to the Wallet Address</li>
+                            <li>Screenshot Your proof of Payment</li>
+                            <li>Enter the Amount you Deposited below</li>
+                            <li>Upload your proof of Payment</li>
+                            <li>Click on Deposit after the above process is completed</li>
+                        </ol>
+                        <hr>
+                        
+                    </div>
+
+                    
+                     <div class="withdraw-section">
+                        <div class="row">
+                            <div class="col-xl-5 col-lg-5 col-md-5">
+                                <h3 class="title">
+                                    Wallet Details
+                                </h3>
+                                <div class="add-credit-card card">
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="row">
+                                                <div class="col-xl-10 col-lg-8">
+                                                    <div class="form-group">
+                                                      <label for="exampleInputEmail1" class="text-danger"> {{method.name}} Wallet Address</label>
+                                                      <input type="text" value="{{method.address}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" readonly >
+                                                    </div>
+                                                    <div class="form-group">
+                                                      <label for="exampleInputEmail4"></label>
+                                                      <input type="text" value="{{method.name | title }} - {{method.address_type}}" class="form-control" id="exampleInputEmail4" aria-describedby="emailHelp" readonly>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                            <!-- <button type="submit" class="btn-hyipox-medium btn-add-new-card">Add New Account</button> -->
+                                          </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-7 col-lg-7 col-md-7">
+                                <h3 class="title">
+                                    Input Your Deposit Details
+                                </h3>
+                                <div class="last-step">
+                                    <div class="payment-method-list row">
+
+                                        <div class="col-xl-6 col-lg-6 col-sm-12">
+                                            <div class="oit-width-1">
+                                                <label>Enter the Amount Deposited</label>
+                                                <form method="post" accept="" enctype="multipart/form-data">
+                                                    {% csrf_token %}
+                                                    <span class="currency-symbol" id="basic-addon1">$</span>
+                                                    {{form.amount|add_class:"form-control"}}
+                                                        <button class="dropdown-toggle displayed-selected-currency" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            USD
+                                                        </button>
+                                                        
+                                                        <label>Upload your Proof of Payment</label>
+                                                
+                                                        {{form.image|add_class:"form-control"}}
+                                                                                                                                                                        
+                                                        <button type="submit" class="btn-hyipox-medium btn-add-new-card">Submit Your Deposit</button>
+                                                </form>
+                                                </div>
+                                                </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                    
+                </div>
+            </div>
+            <!-- account end -->
+{% endblock %}
